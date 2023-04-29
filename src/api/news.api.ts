@@ -1,10 +1,8 @@
-import { axiosNewsInstance  } from "@/plugins/newsAxiosInstance";
 import type { AxiosPromise } from "axios";
+import { axiosNewsInstance  } from "@/plugins/newsAxiosInstance";
 
-const getAllNewsPapers = (): AxiosPromise => {
-  return axiosNewsInstance.get('/');
+export default {
+   getAllNewsPapers: (): AxiosPromise => {
+    return axiosNewsInstance.get('/');
+  }
 }
-
-export {
-  getAllNewsPapers
-};
