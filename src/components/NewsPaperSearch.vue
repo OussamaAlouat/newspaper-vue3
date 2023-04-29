@@ -1,0 +1,39 @@
+<template>
+  <v-container id="input-usage" fluid>
+    <v-row class="row-box">
+      <v-col cols="8">
+        <v-text-field 
+          label="Search"
+          hide-details="auto"
+          append-icon="mdi-magnify"
+          :on-click:append="search"
+          v-model="searchValue"
+        >
+        </v-text-field>
+      </v-col>
+    </v-row>
+  </v-container>
+</template>
+
+<script lang="ts" setup>
+import useNewspaper from '@/composables/useNewsPaper';
+import { ref } from 'vue';
+const searchValue = ref<string>('');
+const {  searchedNews, searchByTitle } = useNewspaper();
+
+const search = () => {
+  if (searchValue.value !== '') {
+    searchByTitle(searchValue.value);
+  }
+  console.log(searchedNews);
+}
+
+
+</script>
+
+<style lang="scss">
+.row-box {
+  justify-content: center;
+  display: flex;
+}
+</style>
