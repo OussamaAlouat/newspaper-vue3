@@ -15,13 +15,13 @@ const useNewspaper = () => {
   console.log('Me llama')
   const store = useNewsPaperStore();
   const { searchedNews } = storeToRefs(store);
-  const isLoading = ref<boolean>(false);
 
   const searchByTitle = (title: string) => {
+    store.setLoadingValue(true);
     loadNewsPaper(title).then((result) =>{
       if (result && result.data) {
         store.setSearchedNews(result.data);
-        isLoading.value = false;
+        store.setLoadingValue(false);
       }
     });
   }
@@ -29,7 +29,7 @@ const useNewspaper = () => {
   return {
     // Properties
     searchedNews,
-    isLoading,
+    
     // Actions
     searchByTitle,
   }

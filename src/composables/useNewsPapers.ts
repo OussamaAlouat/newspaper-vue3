@@ -14,19 +14,18 @@ const loadNewsPapers = async():Promise<AxiosResponse> => {
 const useNewspapers = () => {
   //store reference
   const store = useNewsPaperStore();
-  const { news, searchedNews } = storeToRefs(store);
+  const { news, searchedNews, isLoading } = storeToRefs(store);
 
   // Variables to control flux
-  const isLoading = ref<boolean>(false);
 
   // Actions
   const getAllNewsPapers = () => {
-    isLoading.value = true;
+    store.setLoadingValue(true);
     loadNewsPapers().then((response: AxiosResponse) => {
       if(response && response.data && response.data.data ) {
         const values = response.data.data;
         store.setNewsPapers(values);
-        isLoading.value = false;
+        store.setLoadingValue(false);
       }
     }).catch((err) => {
       console.log(err);
