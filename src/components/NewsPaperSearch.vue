@@ -1,7 +1,7 @@
 <template>
   <v-container id="input-usage" fluid>
-    <v-row>
-      <v-col cols="12">
+    <v-row class="row-box">
+      <v-col cols="8">
         <v-text-field 
           label="Search"
           hide-details="auto"
@@ -19,7 +19,7 @@
 import useNewspaper from '@/composables/useNewsPaper';
 import { ref } from 'vue';
 const searchValue = ref<string>('');
-const { isLoading, searchedNews, searchByTitle } = useNewspaper();
+const {  searchedNews, searchByTitle } = useNewspaper();
 
 const search = () => {
   if (searchValue.value !== '') {
@@ -31,4 +31,9 @@ const search = () => {
 
 </script>
 
-<style lang="scss"></style>
+<style lang="scss">
+.row-box {
+  justify-content: center;
+  display: flex;
+}
+</style>
