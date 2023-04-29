@@ -3,6 +3,10 @@ import { axiosNewsInstance  } from "@/plugins/newsAxiosInstance";
 
 export default {
    getAllNewsPapers: (): AxiosPromise => {
-    return axiosNewsInstance.get('/');
-  }
+    return axiosNewsInstance.get('/all');
+  },
+
+  getNewsByTitle: (title: string):AxiosPromise => {
+    return axiosNewsInstance.get(`/?title=${title}`);
+  } 
 }
