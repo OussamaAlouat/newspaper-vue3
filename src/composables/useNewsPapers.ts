@@ -4,36 +4,45 @@ import type { AxiosResponse } from "axios";
 
 import newsApi from "@/api/news.api";
 import { storeToRefs } from 'pinia';
-import { watch } from 'vue';
+import { ref } from 'vue';
 
 const loadNewsPapers = async():Promise<AxiosResponse> => {
   const data = await newsApi.getAllNewsPapers();
-  console.log(data);
   return data;
 }
 
-
-
-const useNewspaper = () => {
+const useNewspapers = () => {
+  //store reference
   const store = useNewsPaperStore();
-  const { news } = storeToRefs(store);
+  const { news, searchedNews } = storeToRefs(store);
 
-  const { data, isLoading } = useQuery(
-    ['newsPaper'],
-    () => loadNewsPapers()
-  );
+  // Variables to control flux
+  const isLoading = ref<boolean>(false);
 
-  watch(data, newsPapers => {
-    if(newsPapers && newsPapers.data && newsPapers.data.data ) {
-      const values = newsPapers.data.data;
-      store.setNewsPapers(values)
-    }
-  });
+  // Actions
+  const getAllNewsPapers = () => {
+    isLoading.value = true;
+    loadNewsPapers().then((response: AxiosResponse) => {
+      if(response && response.data && response.data.data ) {
+        const values = response.data.data;
+        store.setNewsPapers(values);
+        isLoading.value = false;
+      }
+    }).catch((err) => {
+      console.log(err);
+    })
+  };
+
 
   return {
+    // Properties
     news,
-    isLoading
+    isLoading,
+    searchedNews,
+
+    // Actions
+    getAllNewsPapers,
   }
 };
 
-export default useNewspaper;
+export default useNewspapers;
