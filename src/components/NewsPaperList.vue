@@ -9,7 +9,6 @@ const news = toRef(props, 'newsPapers');
 </script>
 
 <template>
-  <h4>Listado de noticias</h4>
   <div class="card-container">
     <div v-for="npaper of news" :key="npaper._id" class="mb-10">
       <NewsPaperCard :newspaper="npaper"/>
