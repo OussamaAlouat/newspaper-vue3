@@ -1,35 +1,36 @@
 <script lang="ts" setup>
 import type { NewsPaper } from '@/interfaces/newsPaper';
 import { toRef, ref } from 'vue';
+import { useRouter } from 'vue-router';
 
 const props = defineProps<{ newspaper: NewsPaper }>();
 const newspaper = toRef(props, 'newspaper');
 const show = ref<boolean>(false);
 
-const getFormatedDate= (date: string): string => {
-  return new Date(date).toLocaleDateString();
-}
-
 const getLanguages= (array: string []): string => array.toString();
+const router = useRouter();
+const goToDetail = () => router.push(`/${newspaper.value._id}`);
 
 </script>
 
 <template>
   <div>
     <v-card class="mx-auto" max-width="350" min-width="300" max-height="600px">
-      <v-img :src="newspaper.image" height="200px" width="200pxx" cover></v-img>
+      <v-img :src="newspaper.image" width="auto" height="200px">
+          <template v-slot:error>
+          <v-img src="/public/no-image.ico" />
+        </template>
+      </v-img>
       <v-card-title>
         {{ newspaper.title }}
       </v-card-title>
 
       <v-card-subtitle>
-        Created on: {{ getFormatedDate(newspaper.creation_date) }}
+        Created on: {{ newspaper.creation_date }}
       </v-card-subtitle>
 
       <v-card-actions>
-        <v-btn color="orange-lighten-2" variant="text">
-          LEER MAS
-        </v-btn>
+        <v-btn color="orange-lighten-2" variant="text" @click="goToDetail">LEER MAS</v-btn>
         <v-spacer></v-spacer>
         <v-btn :icon="show ? 'mdi-chevron-up' : 'mdi-chevron-down'" @click="show = !show"></v-btn>
       </v-card-actions>
