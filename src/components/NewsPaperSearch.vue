@@ -19,13 +19,12 @@
 import useNewspaper from '@/composables/useNewsPaper';
 import { ref } from 'vue';
 const searchValue = ref<string>('');
-const {  searchedNews, searchByTitle } = useNewspaper();
+const {  searchByTitle } = useNewspaper();
 
 const search = () => {
   if (searchValue.value !== '') {
     searchByTitle(searchValue.value);
   }
-  console.log(searchedNews);
 }
 
 
