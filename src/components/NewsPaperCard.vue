@@ -14,7 +14,7 @@ const goToDetail = () => router.push(`/${newspaper.value._id}`);
 </script>
 
 <template>
-  <div>
+  <div class="p-10">
     <v-card class="mx-auto" max-width="350" min-width="300" max-height="600px">
       <v-img :src="newspaper.image" width="auto" height="200px">
           <template v-slot:error>
@@ -59,5 +59,8 @@ const goToDetail = () => router.push(`/${newspaper.value._id}`);
     overflow: hidden;
     display: inline-block;
     height: 150px;
+}
+.p-10 {
+  padding: 10px;
 }
 </style>
