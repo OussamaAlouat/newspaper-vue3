@@ -3,6 +3,7 @@ import type { AxiosResponse } from "axios";
 
 import newsApi from "@/api/news.api";
 import { storeToRefs } from 'pinia';
+import { computed } from 'vue';
 
 const loadNewsPapers = async():Promise<AxiosResponse> => {
   const data = await newsApi.getAllNewsPapers();
@@ -24,10 +25,12 @@ const useNewspapers = () => {
         store.setLoadingValue(false);
       } else {
         // No data found
+        store.setNewsPapers([]);
         store.setLoadingValue(false);
       }
     }).catch((err) => {
       store.setLoadingValue(false);
+      store.setNewsPapers([]);
       console.log(err);
     })
   };
@@ -38,6 +41,7 @@ const useNewspapers = () => {
     news,
     isLoading,
     searchedNews,
+    searchedTotal: computed<number>(() => searchedNews.value.length),
 
     // Actions
     getAllNewsPapers,
