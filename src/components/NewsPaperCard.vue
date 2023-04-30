@@ -5,37 +5,44 @@ import { toRef, ref } from 'vue';
 const props = defineProps<{ newspaper: NewsPaper }>();
 const newspaper = toRef(props, 'newspaper');
 const show = ref<boolean>(false);
+
+const getFormatedDate= (date: string): string => {
+  return new Date(date).toLocaleDateString();
+}
+
+const getLanguages= (array: string []): string => array.toString();
+
 </script>
 
 <template>
   <div>
-    <v-card class="mx-auto" max-width="344">
-      <v-img :src="newspaper.image" height="200px" cover></v-img>
-
+    <v-card class="mx-auto" max-width="350" min-width="300" max-height="600px">
+      <v-img :src="newspaper.image" height="200px" width="200pxx" cover></v-img>
       <v-card-title>
         {{ newspaper.title }}
       </v-card-title>
 
       <v-card-subtitle>
-        Created on: {{ newspaper.creation_date }}
+        Created on: {{ getFormatedDate(newspaper.creation_date) }}
       </v-card-subtitle>
 
       <v-card-actions>
         <v-btn color="orange-lighten-2" variant="text">
-          Explore
+          LEER MAS
         </v-btn>
-
         <v-spacer></v-spacer>
-
         <v-btn :icon="show ? 'mdi-chevron-up' : 'mdi-chevron-down'" @click="show = !show"></v-btn>
       </v-card-actions>
 
       <v-expand-transition>
         <div v-show="show">
           <v-divider></v-divider>
-
+  
           <v-card-text>
-            {{ newspaper.abstract }}
+            <div>
+              <p>Autor: {{ newspaper.publisher.name }}</p>
+              <p>Idiomas: {{ getLanguages(newspaper.languages) }}</p>
+            </div>
           </v-card-text>
         </div>
       </v-expand-transition>
@@ -44,4 +51,12 @@ const show = ref<boolean>(false);
 </template>
 
 
-<style lang="scss"></style>
+<style lang="scss">
+.abstract-container {
+  line-height: 1.25rem;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    display: inline-block;
+    height: 150px;
+}
+</style>
