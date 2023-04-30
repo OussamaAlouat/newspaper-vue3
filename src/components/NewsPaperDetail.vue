@@ -9,10 +9,13 @@ const newsPaper = toRef(props, 'newspaper');
 
 <template>
   <div>
-    <div>
-      <div class="img-box">
-        <img :src="newsPaper.image" :alt="newsPaper.title" />
-      </div>
+    <div class="img-box">
+
+      <v-img :src="newspaper.image" width="auto" height="200px" :alt="newsPaper.title">
+        <template v-slot:error>
+          <v-img src="/public/no-image.png" />
+        </template>
+      </v-img>
     </div>
 
 

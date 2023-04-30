@@ -18,7 +18,7 @@ const goToDetail = () => router.push(`/${newspaper.value._id}`);
     <v-card class="mx-auto" max-width="350" min-width="300" max-height="600px">
       <v-img :src="newspaper.image" width="auto" height="200px">
           <template v-slot:error>
-          <v-img src="/public/no-image.ico" />
+          <v-img src="/public/no-image.png" />
         </template>
       </v-img>
       <v-card-title>
