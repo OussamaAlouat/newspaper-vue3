@@ -5,8 +5,8 @@
         <v-text-field 
           label="Search"
           hide-details="auto"
-          append-icon="mdi-magnify"
-          :on-click:append="search"
+          :on-click:append-inner="search"
+          append-inner-icon="mdi-magnify"
           v-model="searchValue"
         >
         </v-text-field>
