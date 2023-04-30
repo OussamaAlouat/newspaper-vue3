@@ -1,7 +1,7 @@
 <template>
   <v-container id="input-usage" fluid>
     <v-row class="row-box">
-      <v-col cols="8">
+      <v-col cols="12" md="8" sm="12" lg="8" xl="8">
         <v-text-field 
           label="Search"
           hide-details="auto"
