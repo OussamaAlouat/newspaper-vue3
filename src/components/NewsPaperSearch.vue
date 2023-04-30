@@ -1,12 +1,12 @@
 <template>
   <v-container id="input-usage" fluid>
     <v-row class="row-box">
-      <v-col cols="8">
+      <v-col cols="12" md="8" sm="12" lg="8" xl="8">
         <v-text-field 
           label="Search"
           hide-details="auto"
-          append-icon="mdi-magnify"
-          :on-click:append="search"
+          :on-click:append-inner="search"
+          append-inner-icon="mdi-magnify"
           v-model="searchValue"
         >
         </v-text-field>
@@ -19,13 +19,12 @@
 import useNewspaper from '@/composables/useNewsPaper';
 import { ref } from 'vue';
 const searchValue = ref<string>('');
-const {  searchedNews, searchByTitle } = useNewspaper();
+const {  searchByTitle } = useNewspaper();
 
 const search = () => {
   if (searchValue.value !== '') {
     searchByTitle(searchValue.value);
   }
-  console.log(searchedNews);
 }
 
 

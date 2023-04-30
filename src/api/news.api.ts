@@ -8,5 +8,9 @@ export default {
 
   getNewsByTitle: (title: string):AxiosPromise => {
     return axiosNewsInstance.get(`/?title=${title}`);
-  } 
+  },
+
+  getNewsById: (id: string) => {
+    return axiosNewsInstance.get(`/id/${id}`);
+  }
 }

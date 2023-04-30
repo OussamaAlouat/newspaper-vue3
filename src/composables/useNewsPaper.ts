@@ -12,7 +12,6 @@ const loadNewsPaper = async(title: string):Promise<AxiosResponse> => {
 }
 
 const useNewspaper = () => {
-  console.log('Me llama')
   const store = useNewsPaperStore();
   const { searchedNews } = storeToRefs(store);
 
@@ -22,14 +21,22 @@ const useNewspaper = () => {
       if (result && result.data) {
         store.setSearchedNews(result.data);
         store.setLoadingValue(false);
+      } else {
+        // No data found
+        store.setSearchedNews([]);
+        store.setLoadingValue(false);
       }
-    });
+    }).catch((err) => {
+      // There are some error
+      store.setSearchedNews([]);
+      store.setLoadingValue(false);
+    })
   }
 
   return {
     // Properties
     searchedNews,
-    
+
     // Actions
     searchByTitle,
   }
