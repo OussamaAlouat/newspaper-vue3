@@ -1,4 +1,4 @@
-import { ref, computed } from 'vue';
+import { ref } from 'vue';
 import { defineStore } from 'pinia';
 
 import type { NewsPaper } from '@/interfaces/newsPaper';
@@ -23,7 +23,6 @@ export const useNewsPaperStore = defineStore('news', () => {
 
     return data;
   }
-
 
   const setLoadingValue = (value: boolean):void => {
     isLoading.value = value;
