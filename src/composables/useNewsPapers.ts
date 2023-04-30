@@ -1,10 +1,8 @@
 import { useNewsPaperStore } from './../stores/store';
-import { useQuery } from "@tanstack/vue-query";
 import type { AxiosResponse } from "axios";
 
 import newsApi from "@/api/news.api";
 import { storeToRefs } from 'pinia';
-import { ref } from 'vue';
 
 const loadNewsPapers = async():Promise<AxiosResponse> => {
   const data = await newsApi.getAllNewsPapers();
@@ -16,8 +14,6 @@ const useNewspapers = () => {
   const store = useNewsPaperStore();
   const { news, searchedNews, isLoading } = storeToRefs(store);
 
-  // Variables to control flux
-
   // Actions
   const getAllNewsPapers = () => {
     store.setLoadingValue(true);
@@ -26,8 +22,12 @@ const useNewspapers = () => {
         const values = response.data.data;
         store.setNewsPapers(values);
         store.setLoadingValue(false);
+      } else {
+        // No data found
+        store.setLoadingValue(false);
       }
     }).catch((err) => {
+      store.setLoadingValue(false);
       console.log(err);
     })
   };
