@@ -1,6 +1,6 @@
 import { createApp } from 'vue';
 import { createPinia } from 'pinia';
-import { VueQueryPlugin } from '@tanstack/vue-query';
+
 // Vuetify
 import 'vuetify/styles';
 import "@mdi/font/css/materialdesignicons.css";
@@ -23,20 +23,5 @@ const vuetify = createVuetify({
 app.use(vuetify);
 app.use(createPinia());
 app.use(router);
-
-/*
-  Configuration of cache, for all queries,
-  we will mantein the data for only one minute
-*/
-
-VueQueryPlugin.install(app, {
-  queryClientConfig: {
-    defaultOptions: {
-      queries: {
-        cacheTime: 1000 * 60, 
-      }
-    }
-  }
-});
 
 app.mount('#app')

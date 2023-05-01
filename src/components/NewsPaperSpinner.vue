@@ -1,3 +1,6 @@
+<script lang="ts" setup>
+</script>
+
 <template>
   <div class="spinner-box">
     <v-progress-circular
@@ -7,10 +10,6 @@
     ></v-progress-circular>
   </div>
 </template>
-
-<script lang="ts" setup>
-
-</script>
 
 <style lang="scss">
 .spinner-box {

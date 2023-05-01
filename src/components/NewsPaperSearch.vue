@@ -1,3 +1,17 @@
+<script lang="ts" setup>
+import { ref } from 'vue';
+import useNewspaper from '@/composables/useNewsPaper';
+
+const searchValue = ref<string>('');
+const {  searchByTitle } = useNewspaper();
+
+const search = () => {
+  if (searchValue.value !== '') {
+    searchByTitle(searchValue.value);
+  }
+}
+</script>
+
 <template>
   <v-container id="input-usage" fluid>
     <v-row class="row-box">
@@ -14,21 +28,6 @@
     </v-row>
   </v-container>
 </template>
-
-<script lang="ts" setup>
-import useNewspaper from '@/composables/useNewsPaper';
-import { ref } from 'vue';
-const searchValue = ref<string>('');
-const {  searchByTitle } = useNewspaper();
-
-const search = () => {
-  if (searchValue.value !== '') {
-    searchByTitle(searchValue.value);
-  }
-}
-
-
-</script>
 
 <style lang="scss">
 .row-box {
