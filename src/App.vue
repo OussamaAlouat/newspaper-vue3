@@ -1,15 +1,24 @@
 <script setup lang="ts">
-import { RouterLink, RouterView } from 'vue-router'
+import { RouterLink, RouterView } from 'vue-router';
+import NewspaperNav from './components/NewspaperNav.vue';
 </script>
 
 <template>
-  <h2>News app</h2>
-  <RouterView />
+  <header>
+    <newspaper-nav />
+  </header>
+  <main class="main">
+    <RouterView/>
+  </main>
+
 </template>
 
-<style scoped>
-h2 {
-  text-align: center;
-  justify-content: center;
+<style >
+.main {
+  display: flex;
+  flex-direction: column;
+  top: 64px;
+  height: calc(100% -64);
 }
+
 </style>
