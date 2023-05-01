@@ -43,8 +43,9 @@ const value = computed<string>(() => `Se han encontrado ${searchedTotal.value} n
   display: flex;
   justify-content: center;
   align-items: center;
-  margin-bottom: 10px;
   width: 100%;
+  margin-bottom: 10px;
+  
 }
 
 .news-alert {
