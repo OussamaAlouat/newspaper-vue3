@@ -1,10 +1,8 @@
 import { useNewsPaperStore } from './../stores/store';
-import { useQuery } from "@tanstack/vue-query";
 import type { AxiosResponse } from "axios";
 
 import newsApi from "@/api/news.api";
 import { storeToRefs } from 'pinia';
-import { ref } from 'vue';
 
 const loadNewsPaper = async(title: string):Promise<AxiosResponse> => {
   const data = await newsApi.getNewsByTitle(title);
@@ -13,29 +11,29 @@ const loadNewsPaper = async(title: string):Promise<AxiosResponse> => {
 
 const useNewspaper = () => {
   const store = useNewsPaperStore();
-  const { searchedNews } = storeToRefs(store);
+  const {  news } = storeToRefs(store);
 
   const searchByTitle = (title: string) => {
     store.setLoadingValue(true);
     loadNewsPaper(title).then((result) =>{
       if (result && result.data) {
-        store.setSearchedNews(result.data);
+        store.setNewsPapers(result.data);
         store.setLoadingValue(false);
       } else {
         // No data found
-        store.setSearchedNews([]);
+        store.setNewsPapers([]);
         store.setLoadingValue(false);
       }
     }).catch((err) => {
       // There are some error
-      store.setSearchedNews([]);
+      store.setNewsPapers([]);
       store.setLoadingValue(false);
     })
   }
 
   return {
     // Properties
-    searchedNews,
+    news,
 
     // Actions
     searchByTitle,

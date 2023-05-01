@@ -13,7 +13,7 @@ const loadNewsPapers = async():Promise<AxiosResponse> => {
 const useNewspapers = () => {
   //store reference
   const store = useNewsPaperStore();
-  const { news, searchedNews, isLoading } = storeToRefs(store);
+  const { news, isLoading } = storeToRefs(store);
 
   // Actions
   const getAllNewsPapers = () => {
@@ -40,8 +40,7 @@ const useNewspapers = () => {
     // Properties
     news,
     isLoading,
-    searchedNews,
-    searchedTotal: computed<number>(() => searchedNews.value.length),
+    totalNews: computed<number>(() => news.value.length),
 
     // Actions
     getAllNewsPapers,

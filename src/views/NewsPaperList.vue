@@ -7,9 +7,8 @@ import NoData from '@/components/NoData.vue';
 import NewsPaperSpinner from '@/components/NewsPaperSpinner.vue';
 import { computed } from 'vue';
 
-const { news, searchedNews ,isLoading, searchedTotal } = useNewspapers();
-const value = computed<string>(() => `Se han encontrado ${searchedTotal.value} noticias`)
-
+const { news ,isLoading, totalNews } = useNewspapers();
+const value = computed<string>(() => `Se han encontrado ${totalNews.value} noticias`)
 
 </script>
 
@@ -18,7 +17,7 @@ const value = computed<string>(() => `Se han encontrado ${searchedTotal.value} n
   <div v-if="isLoading">
     <news-paper-spinner />
   </div>
-  <div  v-else-if="searchedNews.length === 0" class="no-data">
+  <div  v-else-if="news.length === 0" class="no-data">
     <no-data />
   </div>
   <div v-else>
@@ -26,7 +25,7 @@ const value = computed<string>(() => `Se han encontrado ${searchedTotal.value} n
       <v-alert  class="news-alert" :text="value" ></v-alert>
     </div>
 
-    <news-paper-list :newsPapers="searchedNews"></news-paper-list>
+    <news-paper-list :newsPapers="news"></news-paper-list>
   </div>
 
 </template>
