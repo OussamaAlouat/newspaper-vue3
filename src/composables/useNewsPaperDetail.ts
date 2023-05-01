@@ -41,9 +41,6 @@ const useNewsPapeDetail = (id: string) => {
     // Properties
     newsPaper,
     isLoading
-    // Getters
-
-    // Actions
   }
 };
 

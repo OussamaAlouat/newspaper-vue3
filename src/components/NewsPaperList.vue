@@ -1,7 +1,8 @@
 
 <script lang="ts" setup>
-import type { NewsPaper } from '@/interfaces/newsPaper';
 import { toRef } from 'vue';
+
+import type { NewsPaper } from '@/interfaces/newsPaper';
 import NewsPaperCard from './NewsPaperCard.vue';
 
 const props = defineProps<{ newsPapers: NewsPaper[] }>();

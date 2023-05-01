@@ -3,6 +3,7 @@
 import { useRoute } from 'vue-router';
 
 import useNewsPapeDetail from '@/composables/useNewsPaperDetail';
+
 import NewsPaperDetail from '@/components/NewsPaperDetail.vue';
 import NewsPaperSpinner from '@/components/NewsPaperSpinner.vue';
 

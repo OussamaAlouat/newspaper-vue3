@@ -1,11 +1,12 @@
 <script lang="ts" setup>
+import { computed } from 'vue';
 
 import useNewspapers from '@/composables/useNewsPapers';
+
 import NewsPaperList from '@/components/NewsPaperList.vue';
 import NewsPaperSearch from '@/components/NewsPaperSearch.vue';
 import NoData from '@/components/NoData.vue';
 import NewsPaperSpinner from '@/components/NewsPaperSpinner.vue';
-import { computed } from 'vue';
 
 const { news ,isLoading, totalNews, searchAll } = useNewspapers();
 const value = computed<string>(() => `Se han encontrado ${totalNews.value} noticias`)
@@ -24,7 +25,6 @@ const value = computed<string>(() => `Se han encontrado ${totalNews.value} notic
     <div class="alert-box">
       <v-alert  class="news-alert" :text="value" ></v-alert>
     </div>
-
     <news-paper-list :newsPapers="news"></news-paper-list>
   </div>
 

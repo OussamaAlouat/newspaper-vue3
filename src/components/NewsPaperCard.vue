@@ -1,7 +1,8 @@
 <script lang="ts" setup>
-import type { NewsPaper } from '@/interfaces/newsPaper';
 import { toRef, ref } from 'vue';
 import { useRouter } from 'vue-router';
+
+import type { NewsPaper } from '@/interfaces/newsPaper';
 
 const props = defineProps<{ newspaper: NewsPaper }>();
 const newspaper = toRef(props, 'newspaper');

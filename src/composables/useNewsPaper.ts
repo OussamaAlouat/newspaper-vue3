@@ -1,8 +1,8 @@
-import { useNewsPaperStore } from './../stores/store';
 import type { AxiosResponse } from "axios";
-
-import newsApi from "@/api/news.api";
 import { storeToRefs } from 'pinia';
+
+import { useNewsPaperStore } from './../stores/store';
+import newsApi from "@/api/news.api";
 
 const loadNewsPaper = async(title: string):Promise<AxiosResponse> => {
   const data = await newsApi.getNewsByTitle(title);
