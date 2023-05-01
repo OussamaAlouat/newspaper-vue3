@@ -2,10 +2,8 @@ import { storeToRefs } from 'pinia';
 import { computed, watch } from 'vue';
 import type { AxiosResponse } from "axios";
 
-import type { NewsPaper } from './../interfaces/newsPaper';
 import { useNewsPaperStore } from './../stores/store';
 import newsApi from "@/api/news.api";
-
 
 const loadNewsPapers = async():Promise<AxiosResponse> => {
   const data = await newsApi.getAllNewsPapers();
@@ -41,7 +39,7 @@ const useNewspapers = () => {
     if(newValue) {
       getAllNewsPapers();
     } else {
-      store.setNewsPapers([]);
+      store.resetNewsArray();
     }
   })
 
