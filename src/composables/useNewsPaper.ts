@@ -21,12 +21,12 @@ const useNewspaper = () => {
         store.setLoadingValue(false);
       } else {
         // No data found
-        store.setNewsPapers([]);
+        store.resetNewsArray();
         store.setLoadingValue(false);
       }
     }).catch((err) => {
       // There are some error
-      store.setNewsPapers([]);
+      store.resetNewsArray();
       store.setLoadingValue(false);
     })
   }

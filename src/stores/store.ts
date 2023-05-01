@@ -6,6 +6,7 @@ import type { NewsPaper } from '@/interfaces/newsPaper';
 export const useNewsPaperStore = defineStore('news', () => {
   const news = ref<NewsPaper[]>([]);
   const isLoading = ref<boolean>(false);
+  const searchAll = ref<boolean>(false);
 
   const setNewsPapers= (data: NewsPaper[]):void => {
     news.value = formatDatesOfdNews(data);
@@ -19,6 +20,15 @@ export const useNewsPaperStore = defineStore('news', () => {
     return data;
   }
 
+  const switchSearchType = (): void => {
+    searchAll.value = !searchAll.value;
+  };
+
+  const resetNewsArray = (): void =>  {
+    news.value = [];
+
+  };
+
   const setLoadingValue = (value: boolean):void => {
     isLoading.value = value;
   };
@@ -27,11 +37,14 @@ export const useNewsPaperStore = defineStore('news', () => {
     // Properties
     news,
     isLoading,
+    searchAll,
 
     // Getters
 
     // Actions
     setNewsPapers,
-    setLoadingValue
+    setLoadingValue,
+    switchSearchType,
+    resetNewsArray
    }
 })

@@ -1,9 +1,11 @@
-import { useNewsPaperStore } from './../stores/store';
+import { storeToRefs } from 'pinia';
+import { computed, watch } from 'vue';
 import type { AxiosResponse } from "axios";
 
+import type { NewsPaper } from './../interfaces/newsPaper';
+import { useNewsPaperStore } from './../stores/store';
 import newsApi from "@/api/news.api";
-import { storeToRefs } from 'pinia';
-import { computed } from 'vue';
+
 
 const loadNewsPapers = async():Promise<AxiosResponse> => {
   const data = await newsApi.getAllNewsPapers();
@@ -13,7 +15,7 @@ const loadNewsPapers = async():Promise<AxiosResponse> => {
 const useNewspapers = () => {
   //store reference
   const store = useNewsPaperStore();
-  const { news, isLoading } = storeToRefs(store);
+  const { news, isLoading, searchAll } = storeToRefs(store);
 
   // Actions
   const getAllNewsPapers = () => {
@@ -25,22 +27,30 @@ const useNewspapers = () => {
         store.setLoadingValue(false);
       } else {
         // No data found
-        store.setNewsPapers([]);
+        store.resetNewsArray();
         store.setLoadingValue(false);
       }
     }).catch((err) => {
       store.setLoadingValue(false);
-      store.setNewsPapers([]);
+      store.resetNewsArray();
       console.log(err);
     })
   };
 
+  watch(searchAll, (newValue: boolean) => {
+    if(newValue) {
+      getAllNewsPapers();
+    } else {
+      store.setNewsPapers([]);
+    }
+  })
 
   return {
     // Properties
     news,
     isLoading,
     totalNews: computed<number>(() => news.value.length),
+    searchAll,
 
     // Actions
     getAllNewsPapers,
